@@ -60,6 +60,13 @@ export interface ProviderOptions {
   requestTimeout?: number;
 }
 
+export interface SoundOptions
+{
+  critical: boolean
+  name: string
+  volume: number
+}
+
 interface ApsAlert {
   body?: string
   "loc-key"?: string
@@ -75,7 +82,7 @@ interface Aps {
   alert?: string | ApsAlert
   "launch-image"?: string
   badge?: number
-  sound?: string
+  sound?: string | SoundOptions
   "content-available"?: undefined | 1
   "mutable-content"?: undefined | 1
   "url-args"?: string[]
@@ -175,9 +182,9 @@ export class Notification {
    */
   public badge: number;
   /**
-   * The value to specify for `payload.aps.sound`
+   * The value to specify for `payload.aps.sound` can be either a `String` or an `Object` as outlined by the payload documentation.
    */
-  public sound: string;
+  public sound: string|SoundOptions;
   /**
    * The value to specify for `payload.aps.alert` can be either a `String` or an `Object` as outlined by the payload documentation.
    */
